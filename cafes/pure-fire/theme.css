@@ -1,0 +1,464 @@
+/* ============================================================
+   Pure Fire — "dangerously delicious" hazard theme.
+   Loaded after the shared style.css (see "stylesheet" in
+   menu-data.json); only restyles, the layout is the shared one.
+   ============================================================ */
+
+:root {
+  --fire-400:  #fb923c;
+  --fire-500:  #f97316;
+  --fire-600:  #ea580c;
+  --fire-700:  #c2410c;
+  --hz-yellow: #fbbf24;
+  --hz-black:  #0a0a0a;
+  --hz-dark:   #111111;
+  --hz-gray:   #1a1a1a;
+
+  --accent:      var(--fire-500);
+  --accent-ink:  #ffffff;
+  --accent-soft: rgba(249, 115, 22, .12);
+  --accent-deep: #140800;
+  --bg:    var(--hz-black);
+  --card:  var(--hz-gray);
+  --ink:   #e5e7eb;
+  --muted: #9ca3af;
+  --line:  #333333;
+  --shadow-sm: none;
+  --shadow-md: 0 16px 40px rgba(0, 0, 0, .55);
+  --radius:    14px;
+  --radius-sm: 12px;
+
+  --font-brand: "Russo One", "Cairo", sans-serif;
+  --font-body:  "Roboto", "Cairo", system-ui, sans-serif;
+
+  --stripe:      repeating-linear-gradient(-45deg, #fbbf24 0 10px, #0a0a0a 10px 20px);
+  --stripe-thin: repeating-linear-gradient(-45deg, #fbbf24 0 5px,  #0a0a0a 5px 10px);
+  --stripe-fire: repeating-linear-gradient(-45deg, #f97316 0 10px, #0a0a0a 10px 20px);
+  --cut: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  --glow-orange: 0 0 10px rgba(249,115,22,.5), 0 0 20px rgba(249,115,22,.3);
+  --glow-yellow: 0 0 10px rgba(251,191,36,.5), 0 0 20px rgba(251,191,36,.3);
+}
+:root[dir="rtl"] {
+  --font-brand: "Cairo", "Russo One", sans-serif;
+  --font-body:  "Cairo", "Roboto", system-ui, sans-serif;
+}
+/* Letter-spacing breaks joined Arabic letters */
+:root[dir="rtl"] body * { letter-spacing: 0 !important; }
+
+body { background: var(--hz-black); color: var(--ink); }
+@media (min-width: 640px) {
+  body { background: #050505; }
+  .shell { box-shadow: 0 0 80px rgba(249, 115, 22, .08); }
+}
+
+/* Caution stripe across the very top */
+.shell::before {
+  content: "";
+  display: block;
+  height: 8px;
+  background: var(--stripe);
+}
+
+/* ---------- Cover ---------- */
+.cover {
+  height: clamp(430px, 122vw, 560px);
+  background: var(--hz-black);
+  border-end-start-radius: 26px;
+  border-end-end-radius: 26px;
+}
+.cover::after {
+  background: linear-gradient(180deg,
+    rgba(10,10,10,.55) 0%,
+    rgba(10,10,10,.15) 28%,
+    rgba(10,10,10,.55) 55%,
+    rgba(10,10,10,.94) 80%,
+    #0a0a0a 100%);
+}
+.cover-brand { padding-bottom: 26px; }
+
+.brand-logo {
+  width: 108px; height: 108px;
+  margin-bottom: 14px;
+  border: 2px solid rgba(249, 115, 22, .7);
+  box-shadow: 0 0 30px rgba(249, 115, 22, .3);
+  animation: riseIn .9s .05s var(--ease) both, firePulse 3s 1s ease-in-out infinite;
+}
+@keyframes firePulse {
+  0%, 100% { box-shadow: 0 0 30px rgba(249,115,22,.3); }
+  50%      { box-shadow: 0 0 60px rgba(249,115,22,.6), 0 0 90px rgba(251,191,36,.2); }
+}
+
+.cafe-name {
+  font-family: "Russo One", var(--font-brand);
+  font-size: clamp(42px, 12.5vw, 60px);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  text-shadow: none;
+}
+:root[dir="rtl"] .cafe-name { font-family: "Cairo", sans-serif; font-weight: 800; font-size: clamp(40px, 12vw, 56px); line-height: 1.15; }
+.cafe-name .w1 { color: #fff; }
+.cafe-name .w2 { color: var(--fire-500); text-shadow: var(--glow-orange); }
+
+.cafe-subtitle {
+  margin-top: 8px;
+  font-family: "Russo One", var(--font-brand);
+  font-size: 12px;
+  letter-spacing: .38em;
+  color: var(--hz-yellow);
+}
+:root[dir="rtl"] .cafe-subtitle { font-family: "Cairo", sans-serif; font-weight: 700; font-size: 15px; }
+.cafe-subtitle::before,
+.cafe-subtitle::after { background: var(--hz-yellow); opacity: .7; }
+
+.hours-pill {
+  font-family: "Russo One", var(--font-brand);
+  font-weight: 400;
+  font-size: 11px;
+  letter-spacing: .1em;
+  background: rgba(10, 10, 10, .7);
+}
+:root[dir="rtl"] .hours-pill { font-family: "Cairo", sans-serif; font-weight: 700; font-size: 12.5px; }
+
+/* AR / EN toggle */
+.lang-btn {
+  border: 1px solid var(--fire-500);
+  border-radius: 0;
+  clip-path: var(--cut);
+  background: rgba(10, 10, 10, .75);
+  color: var(--fire-500);
+  font-family: "Russo One", sans-serif;
+  font-weight: 400;
+}
+.lang-btn:hover { background: var(--fire-500); color: #fff; }
+
+/* ---------- Warning badge + tagline ---------- */
+.extras { padding-top: 22px; }
+.cafe-badge { margin-bottom: 12px; }
+.cafe-badge span {
+  border: 4px solid transparent;
+  border-radius: 0;
+  background:
+    linear-gradient(#0a0a0a, #0a0a0a) padding-box,
+    var(--stripe-thin) border-box;
+  padding: 7px 14px;
+  color: var(--hz-yellow);
+  font-family: "Russo One", var(--font-brand);
+  font-weight: 400;
+  font-size: 11.5px;
+  letter-spacing: .18em;
+}
+:root[dir="rtl"] .cafe-badge span { font-family: "Cairo", sans-serif; font-weight: 800; font-size: 13.5px; }
+.cafe-tagline {
+  color: var(--muted);
+  font-size: 15px;
+  font-weight: 400;
+}
+:root[dir="rtl"] .cafe-tagline { font-size: 16px; font-weight: 600; }
+
+/* ---------- Sticky tabs ---------- */
+.tabsbar {
+  background: rgba(10, 10, 10, .88);
+  border-bottom: 0;
+  margin-top: 18px;
+}
+.tabsbar::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: -4px;
+  height: 4px;
+  background: var(--stripe-thin);
+}
+
+.tab {
+  border: 1px solid var(--line);
+  border-radius: 0;
+  clip-path: var(--cut);
+  background: var(--hz-gray);
+  color: var(--muted);
+  font-family: "Russo One", var(--font-brand);
+  font-weight: 400;
+  font-size: 12.5px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 11px 18px;
+}
+:root[dir="rtl"] .tab { font-family: "Cairo", sans-serif; font-weight: 700; font-size: 14.5px; padding: 9px 18px; }
+.tab:hover { color: #fff; }
+.tab[aria-selected="true"] {
+  background: var(--fire-600);
+  border-color: var(--fire-600);
+  color: #fff;
+  box-shadow: none;
+}
+
+.search-btn, .search-close {
+  background: var(--hz-gray);
+  border-color: var(--line);
+  color: var(--ink);
+  box-shadow: none;
+}
+.search-btn:hover { color: var(--fire-500); border-color: var(--fire-500); }
+.searchbox {
+  background: var(--hz-gray);
+  border-color: var(--line);
+  box-shadow: 0 10px 30px rgba(0,0,0,.6);
+  transition: border-color .2s;
+}
+.searchbox:focus-within { border-color: var(--fire-500); }
+.search-close { background: var(--accent-soft); color: var(--fire-500); }
+
+/* ---------- Category banner ---------- */
+.menu { padding-bottom: 32px; }
+.menu[data-variant="pastries"] { background: var(--hz-dark); }
+
+.cat-hero {
+  border: 1px solid var(--line);
+  background: var(--hz-gray);
+}
+.cat-hero::before {
+  background: linear-gradient(180deg,
+    rgba(10,10,10,.1) 15%,
+    rgba(10,10,10,.6) 55%,
+    rgba(10,10,10,.95) 100%);
+}
+/* caution stripe along the bottom edge of every banner */
+.cat-hero::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 6px;
+  background: var(--stripe);
+}
+.menu[data-variant="matabeqa"] .cat-hero::after { background: var(--stripe-fire); }
+.cat-hero-text { padding: 16px 18px 20px; }
+
+.cat-hero .cat-caption {
+  color: var(--hz-yellow);
+  font-family: "Russo One", var(--font-brand);
+  font-weight: 400;
+  font-size: 10.5px;
+  letter-spacing: .16em;
+}
+:root[dir="rtl"] .cat-hero .cat-caption { font-family: "Cairo", sans-serif; font-weight: 700; font-size: 13px; }
+.cat-hero h2 {
+  font-family: "Russo One", var(--font-brand);
+  font-weight: 400;
+  font-size: 28px;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  text-shadow: none;
+}
+:root[dir="rtl"] .cat-hero h2 { font-family: "Cairo", sans-serif; font-weight: 800; font-size: 28px; }
+.cat-hero h2 .w1 { color: #fff; }
+.cat-hero h2 .w2 { color: var(--fire-500); text-shadow: var(--glow-orange); }
+.menu[data-variant="matabeqa"] .cat-hero h2 .w1 { color: var(--hz-yellow); text-shadow: var(--glow-yellow); }
+.menu[data-variant="matabeqa"] .cat-hero h2 .w2 { color: #fff; text-shadow: none; }
+
+/* ---------- Item cards ---------- */
+.item {
+  background: var(--hz-gray);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  transition: border-color .3s ease, box-shadow .3s ease, transform .3s ease;
+}
+.item:hover {
+  border-color: var(--fire-500);
+  box-shadow: 0 0 15px rgba(249, 115, 22, .2);
+  transform: translateY(-2px);
+}
+.item--matabeqa {
+  background: var(--hz-black);
+  border-color: rgba(251, 191, 36, .25);
+}
+.item--matabeqa:hover { border-color: var(--hz-yellow); box-shadow: 0 0 15px rgba(251, 191, 36, .18); }
+.item--pastries { background: var(--hz-black); }
+
+.thumb { background: #151515; }
+.thumb--ph { color: var(--fire-500); font-family: "Russo One", sans-serif; }
+
+.ibody { gap: 5px; }
+.ibody .cat-tag {
+  border-radius: 4px;
+  background: var(--accent-soft);
+  color: var(--fire-500);
+  font-family: "Russo One", var(--font-brand);
+  font-weight: 400;
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.item--matabeqa .cat-tag { background: rgba(251, 191, 36, .1); color: var(--hz-yellow); }
+:root[dir="rtl"] .ibody .cat-tag { font-family: "Cairo", sans-serif; font-weight: 700; font-size: 11.5px; }
+
+.ibody h3 {
+  font-family: "Russo One", var(--font-brand);
+  font-weight: 400;
+  font-size: 15px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: #fff;
+}
+:root[dir="rtl"] .ibody h3 { font-family: "Cairo", sans-serif; font-weight: 800; font-size: 16.5px; }
+.ibody .desc {
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+:root[dir="rtl"] .ibody .desc { font-size: 13px; line-height: 1.7; }
+
+/* "All items subject to availability" — warning box */
+.menu-note {
+  position: relative;
+  margin: 10px 16px 0;
+  padding: 16px 14px 12px;
+  border: 2px solid var(--hz-yellow);
+  background: rgba(251, 191, 36, .05);
+  color: var(--hz-yellow);
+  font-family: "Russo One", var(--font-brand);
+  font-weight: 400;
+  font-size: 11px;
+  letter-spacing: .14em;
+}
+:root[dir="rtl"] .menu-note { font-family: "Cairo", sans-serif; font-weight: 700; font-size: 13px; }
+.menu-note::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: repeating-linear-gradient(90deg, #fbbf24 0 8px, transparent 8px 16px);
+}
+
+.results-head h2 { color: #fff; font-family: "Russo One", var(--font-brand); font-weight: 400; text-transform: uppercase; }
+:root[dir="rtl"] .results-head h2 { font-family: "Cairo", sans-serif; font-weight: 800; }
+.results-head span { background: var(--accent-soft); color: var(--fire-500); }
+
+/* ---------- Visit card (warning box) ---------- */
+.visit {
+  position: relative;
+  margin-top: 8px;
+  border: 2px solid var(--hz-yellow);
+  border-radius: 6px;
+  background: rgba(251, 191, 36, .04);
+  padding-top: 20px;
+  overflow: hidden;
+}
+.visit::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: repeating-linear-gradient(90deg, #fbbf24 0 8px, transparent 8px 16px);
+}
+.visit-title {
+  color: var(--hz-yellow);
+  font-family: "Russo One", var(--font-brand);
+  font-weight: 400;
+  font-size: 13px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+:root[dir="rtl"] .visit-title { font-family: "Cairo", sans-serif; font-weight: 800; font-size: 16px; }
+.location + .location { border-top-color: var(--line); }
+.location-city {
+  color: #fff;
+  font-family: "Russo One", var(--font-brand);
+  font-weight: 400;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+:root[dir="rtl"] .location-city { font-family: "Cairo", sans-serif; font-weight: 800; }
+.location-addr { color: var(--muted); }
+.location-hours { color: var(--hz-yellow); opacity: .85; }
+.location-phone {
+  border-radius: 0;
+  clip-path: var(--cut);
+  background: var(--fire-600);
+  font-family: "Russo One", sans-serif;
+  font-weight: 400;
+  padding: 8px 14px;
+  transition: background .2s, transform .15s;
+}
+.location-phone:hover { background: var(--fire-700); }
+.location-map { background: var(--accent-soft); color: var(--fire-500); }
+
+.social-row { border-top-color: var(--line); }
+.social-link {
+  background: transparent;
+  border: 2px solid var(--hz-yellow);
+  color: var(--hz-yellow);
+}
+.social-link:hover { background: var(--hz-yellow); color: #0a0a0a; }
+
+/* ---------- Footer ---------- */
+.visit + .foot { padding-top: 0; }
+.foot {
+  margin-top: 30px;
+  padding: 0 24px 40px;
+  background: var(--hz-dark);
+}
+.foot-rule {
+  width: auto;
+  height: 10px;
+  margin: 0 -24px 22px;
+  background: var(--stripe);
+}
+.foot p {
+  font-family: var(--font-body);
+  font-size: 12px;
+  line-height: 1.7;
+  color: #6b7280;
+}
+
+/* ---------- Loading skeleton on dark ---------- */
+.skel {
+  background: linear-gradient(100deg, #141414 40%, #1f1f1f 50%, #141414 60%);
+  background-size: 200% 100%;
+}
+
+/* ---------- Prices ---------- */
+.prices { padding-top: 6px; }
+.price .amount {
+  font-family: "Russo One", sans-serif;
+  font-weight: 400;
+  font-size: 19px;
+  color: var(--fire-500);
+  text-shadow: 0 0 10px rgba(249, 115, 22, .35);
+}
+.price .cur {
+  font-family: "Russo One", "Cairo", sans-serif;
+  font-weight: 400;
+  font-size: 11px;
+  color: var(--hz-yellow);
+  opacity: .9;
+}
+:root[dir="rtl"] .price .cur { font-family: "Cairo", sans-serif; font-weight: 700; font-size: 12.5px; }
+
+/* ---------- Add-ons (always under the menu) ---------- */
+.addons { padding-top: 4px; }
+.addons-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 6px 0 0;
+  font-family: "Russo One", var(--font-brand);
+  font-weight: 400;
+  font-size: 18px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: #fff;
+}
+:root[dir="rtl"] .addons-title { font-family: "Cairo", sans-serif; font-weight: 800; font-size: 20px; }
+.addons-title::before,
+.addons-title::after {
+  content: "";
+  flex: 1;
+  height: 4px;
+  background: var(--stripe-thin);
+}
+.addons-title .w1 { color: var(--fire-500); text-shadow: var(--glow-orange); }
+.items--tiles .ibody h3 { font-size: 13px; }
+:root[dir="rtl"] .items--tiles .ibody h3 { font-size: 14.5px; }
+.items--tiles .price .amount { font-size: 17px; }
+.addons .menu-note { margin: 16px 0 0; }

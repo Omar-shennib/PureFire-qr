@@ -1,0 +1,624 @@
+{
+  "cafeName": {
+    "ar": "بيور فاير",
+    "en": "Pure Fire"
+  },
+  "subtitle": {
+    "ar": "وجبات سريعة",
+    "en": "Fast Food"
+  },
+  "logo": "images/logo.jpg",
+  "tagline": {
+    "ar": "لذيذ بشكل خطير. تقدّم بحذر.",
+    "en": "Dangerously delicious. Proceed with caution."
+  },
+  "coverImage": "https://images.unsplash.com/photo-1635194983462-4975a0abeaa7?w=1200&q=70&auto=format&fit=crop",
+  "coverPosition": "center 60%",
+  "languages": [
+    "ar",
+    "en"
+  ],
+  "defaultLanguage": "ar",
+  "fonts": "https://fonts.googleapis.com/css2?family=Russo+One&family=Roboto:wght@400;500;700&family=Cairo:wght@400;600;700;800&display=swap",
+  "stylesheet": "theme.css",
+  "themeColor": "#f97316",
+  "bgColor": "#0a0a0a",
+  "cardColor": "#1a1a1a",
+  "inkColor": "#e5e7eb",
+  "currency": {
+    "ar": "د.ل",
+    "en": "LYD"
+  },
+  "layout": "rows",
+  "timeZone": "Africa/Tripoli",
+  "hours": {
+    "open": 17,
+    "close": 3,
+    "openText": {
+      "ar": "مفتوح الآن — 5م إلى 3ص",
+      "en": "OPEN NOW — 5PM TO 3AM"
+    },
+    "closedText": {
+      "ar": "مغلق — يفتح الساعة 5م",
+      "en": "CLOSED — OPENS AT 5PM"
+    }
+  },
+  "ui": {
+    "ar": {
+      "search": "🔍 ابحث في القائمة...",
+      "none": "لا توجد نتائج",
+      "branches": "☢ زورنا"
+    },
+    "en": {
+      "search": "🔍 Search menu items...",
+      "none": "No items match",
+      "branches": "☢ Find us"
+    }
+  },
+  "menuNote": {
+    "ar": "⚠ جميع الأصناف حسب التوفر ⚠",
+    "en": "⚠ ALL ITEMS SUBJECT TO AVAILABILITY ⚠"
+  },
+  "locations": [
+    {
+      "city": {
+        "ar": "بيور فاير",
+        "en": "Pure Fire"
+      },
+      "address": {
+        "ar": "شارع الجمهورية، طرابلس، ليبيا",
+        "en": "Al Jumhuriah St, Tripoli, Libya"
+      },
+      "hours": {
+        "ar": "مفتوح يومياً 5:00 مساءً - 3:00 صباحاً",
+        "en": "Open daily, 5:00 PM - 3:00 AM"
+      },
+      "phone": [
+        "0915991992",
+        "0945991992"
+      ],
+      "map": "https://www.google.com/maps/search/?api=1&query=32.8937141,13.206538"
+    }
+  ],
+  "social": {
+    "facebook": "https://www.facebook.com/share/17vSCLPFZK/?mibextid=wwXIfr"
+  },
+  "footerText": {
+    "ar": "☠ {year} بيور فاير للوجبات السريعة. جميع الحقوق محفوظة. ☠",
+    "en": "☠ {year} Pure Fire Fast Food. All Rights Reserved. ☠"
+  },
+  "currencyPosition": "after",
+  "categories": [
+    {
+      "id": "pastries",
+      "name": {
+        "ar": "المعجنات الحارة",
+        "en": "Spicy Pastries"
+      },
+      "variant": "pastries",
+      "caption": {
+        "ar": "⚠ تحذير: طرية ومتفجرة ⚠",
+        "en": "⚠ WARNING: SOFT & EXPLOSIVE ⚠"
+      },
+      "bannerImage": "images/banner-pastries.jpg",
+      "bannerPosition": "center 45%",
+      "items": [
+        {
+          "name": {
+            "ar": "مقلوبة دجاج",
+            "en": "Maqluba Chicken"
+          },
+          "description": {
+            "ar": "دجاج مشوي، طماطم، فلفل، بصل، زيتون، ملفوف، جرجير، سلطة مشوية، بطاطا، صوص، جبنة موزاريلا، جبنة شيدر",
+            "en": "Grilled chicken, tomato, pepper, onion, olives, cabbage, arugula, grilled salad, potatoes, sauce, mozzarella, cheddar"
+          },
+          "image": "images/maqluba-chicken.jpg",
+          "prices": [
+            {
+              "label": "",
+              "price": "19"
+            }
+          ]
+        },
+        {
+          "name": {
+            "ar": "مقلوبة كباب",
+            "en": "Maqluba Kebab"
+          },
+          "description": {
+            "ar": "كباب، طماطم، فلفل، بصل، زيتون، ملفوف، جرجير، سلطة مشوية، بطاطا، صوص، جبنة موزاريلا، جبنة شيدر",
+            "en": "Kebab, tomato, pepper, onion, olives, cabbage, arugula, grilled salad, potatoes, sauce, mozzarella, cheddar"
+          },
+          "image": "images/maqluba-chicken.jpg",
+          "prices": [
+            {
+              "label": "",
+              "price": "23"
+            }
+          ]
+        },
+        {
+          "name": {
+            "ar": "باقيت دجاج",
+            "en": "Baguette Chicken"
+          },
+          "description": {
+            "ar": "دجاج مشوي، طماطم، فلفل، بصل، زيتون، ملفوف، جرجير، سلطة مشوية، بطاطا، صوص، جبنة موزاريلا، جبنة شيدر",
+            "en": "Grilled chicken, tomato, pepper, onion, olives, cabbage, arugula, grilled salad, potatoes, sauce, mozzarella, cheddar"
+          },
+          "image": "images/baguette-kebab.jpg",
+          "prices": [
+            {
+              "label": "",
+              "price": "24"
+            }
+          ]
+        },
+        {
+          "name": {
+            "ar": "باقيت كباب",
+            "en": "Baguette Kebab"
+          },
+          "description": {
+            "ar": "كباب، طماطم، فلفل، بصل، زيتون، ملفوف، جرجير، سلطة مشوية، بطاطا، صوص، جبنة موزاريلا، جبنة شيدر",
+            "en": "Kebab, tomato, pepper, onion, olives, cabbage, arugula, grilled salad, potatoes, sauce, mozzarella, cheddar"
+          },
+          "image": "images/baguette-kebab.jpg",
+          "prices": [
+            {
+              "label": "",
+              "price": "27"
+            }
+          ]
+        },
+        {
+          "name": {
+            "ar": "مشتعلة دجاج",
+            "en": "Flaming Chicken"
+          },
+          "description": {
+            "ar": "دجاج مشوي، طماطم، فلفل حار، بصل، زيتون، ملفوف، جرجير، سلطة مشوية، بطاطا، صوص، جبنة موزاريلا، جبنة شيدر",
+            "en": "Grilled chicken, tomato, chili, onion, olives, cabbage, arugula, grilled salad, potatoes, sauce, mozzarella, cheddar"
+          },
+          "image": "images/flaming-chicken.jpg",
+          "prices": [
+            {
+              "label": "",
+              "price": "26"
+            }
+          ]
+        },
+        {
+          "name": {
+            "ar": "مشتعلة كباب",
+            "en": "Flaming Kebab"
+          },
+          "description": {
+            "ar": "كباب، طماطم، فلفل حار، بصل، زيتون، ملفوف، جرجير، سلطة مشوية، بطاطا، صوص، جبنة موزاريلا، جبنة شيدر",
+            "en": "Kebab, tomato, chili, onion, olives, cabbage, arugula, grilled salad, potatoes, sauce, mozzarella, cheddar"
+          },
+          "image": "images/flaming-chicken.jpg",
+          "prices": [
+            {
+              "label": "",
+              "price": "28"
+            }
+          ]
+        },
+        {
+          "name": {
+            "ar": "ليباني دجاج",
+            "en": "Lebanese Chicken"
+          },
+          "description": {
+            "ar": "دجاج مشوي، طماطم، فلفل، بصل، زيتون، ملفوف، جرجير، سلطة مشوية، بطاطا، صوص، ثلاثة أنواع جبنة",
+            "en": "Grilled chicken, tomato, pepper, onion, olives, cabbage, arugula, grilled salad, potatoes, sauce, three types of cheese"
+          },
+          "image": "images/lebanese-chicken.jpg",
+          "prices": [
+            {
+              "label": "",
+              "price": "25"
+            }
+          ]
+        },
+        {
+          "name": {
+            "ar": "ليباني كباب",
+            "en": "Lebanese Kebab"
+          },
+          "description": {
+            "ar": "كباب، طماطم، فلفل، بصل، زيتون، ملفوف، جرجير، سلطة مشوية، بطاطا، صوص، ثلاثة أنواع جبنة",
+            "en": "Kebab, tomato, pepper, onion, olives, cabbage, arugula, grilled salad, potatoes, sauce, three types of cheese"
+          },
+          "image": "images/lebanese-chicken.jpg"
+        },
+        {
+          "name": {
+            "ar": "كلزوني دجاج",
+            "en": "Calzone Chicken"
+          },
+          "description": {
+            "ar": "دجاج مشوي، طماطم، فلفل، بصل، زيتون، خضار، ملفوف، جرجير، سلطة مشوية، بطاطا، صوص، جبنة",
+            "en": "Grilled chicken, tomato, pepper, onion, olives, vegetables, cabbage, arugula, grilled salad, potatoes, sauce, cheese"
+          },
+          "image": "https://images.unsplash.com/photo-1753656681797-3234c89d6d4d?w=360&q=70&auto=format&fit=crop&h=360",
+          "prices": [
+            {
+              "label": "",
+              "price": "24"
+            }
+          ]
+        },
+        {
+          "name": {
+            "ar": "كلزوني كباب",
+            "en": "Calzone Kebab"
+          },
+          "description": {
+            "ar": "كباب، طماطم، فلفل، بصل، زيتون، خضار، ملفوف، جرجير، سلطة مشوية، بطاطا، صوص، جبنة",
+            "en": "Kebab, tomato, pepper, onion, olives, vegetables, cabbage, arugula, grilled salad, potatoes, sauce, cheese"
+          },
+          "image": "https://images.unsplash.com/photo-1753656681797-3234c89d6d4d?w=360&q=70&auto=format&fit=crop&h=360",
+          "prices": [
+            {
+              "label": "",
+              "price": "27"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pizza",
+      "name": {
+        "ar": "منطقة البيتزا",
+        "en": "Pizza Zone"
+      },
+      "caption": {
+        "ar": "☢ تنبيه: جبن ذايب قدامك ☢",
+        "en": "☢ CAUTION: MOLTEN CHEESE AHEAD ☢"
+      },
+      "bannerImage": "https://images.unsplash.com/photo-1593504049359-74330189a345?w=1000&q=70&auto=format&fit=crop",
+      "bannerPosition": "center 55%",
+      "itemTag": {
+        "ar": "🍕 بيتزا",
+        "en": "🍕 Pizza"
+      },
+      "items": [
+        {
+          "name": {
+            "ar": "مارجريتا",
+            "en": "Margherita"
+          },
+          "description": {
+            "ar": "صلصة، جبنة",
+            "en": "Sauce, cheese"
+          },
+          "image": "https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?w=360&q=70&auto=format&fit=crop&h=360",
+          "prices": [
+            {
+              "label": "",
+              "price": "16"
+            }
+          ]
+        },
+        {
+          "name": {
+            "ar": "مارجريتا 2",
+            "en": "Margherita 2"
+          },
+          "description": {
+            "ar": "صلصة، طماطم، زيتون، جبنة",
+            "en": "Sauce, tomato, olives, cheese"
+          },
+          "image": "https://images.unsplash.com/photo-1625401514458-6c8a5e7d55da?w=360&q=70&auto=format&fit=crop&h=360",
+          "prices": [
+            {
+              "label": "",
+              "price": "17"
+            }
+          ]
+        },
+        {
+          "name": {
+            "ar": "فونجي",
+            "en": "Funghi"
+          },
+          "description": {
+            "ar": "صلصة، نقانق، جبنة",
+            "en": "Sauce, sausage, cheese"
+          },
+          "image": "https://images.unsplash.com/photo-1700760934249-93efbb574d23?w=360&q=70&auto=format&fit=crop&h=360",
+          "prices": [
+            {
+              "label": "",
+              "price": "18"
+            }
+          ]
+        },
+        {
+          "name": {
+            "ar": "خضرة",
+            "en": "Veggie"
+          },
+          "description": {
+            "ar": "صلصة، طماطم، فلفل، بصل، زيتون، جبنة",
+            "en": "Sauce, tomato, pepper, onion, olives, cheese"
+          },
+          "image": "https://images.unsplash.com/photo-1617470703128-26a0fc9af10f?w=360&q=70&auto=format&fit=crop&h=360",
+          "prices": [
+            {
+              "label": "",
+              "price": "19"
+            }
+          ]
+        },
+        {
+          "name": {
+            "ar": "خضرة سبايسي",
+            "en": "Spicy Veggie"
+          },
+          "description": {
+            "ar": "صلصة، طماطم، فلفل حار، بصل، زيتون، جبنة",
+            "en": "Sauce, tomato, chili, onion, olives, cheese"
+          },
+          "image": "https://images.unsplash.com/photo-1655673654158-9f7285b7d1ea?w=360&q=70&auto=format&fit=crop&h=360"
+        },
+        {
+          "name": {
+            "ar": "تونة",
+            "en": "Tuna"
+          },
+          "description": {
+            "ar": "صلصة، تونة، طماطم، فلفل حار، زيتون، جبنة",
+            "en": "Sauce, tuna, tomato, chili, olives, cheese"
+          },
+          "image": "https://images.unsplash.com/photo-1721001311219-5d2543d03aed?w=360&q=70&auto=format&fit=crop&h=360",
+          "prices": [
+            {
+              "label": "",
+              "price": "19"
+            }
+          ]
+        },
+        {
+          "name": {
+            "ar": "تونة فونجي",
+            "en": "Tuna Funghi"
+          },
+          "description": {
+            "ar": "صلصة، تونة، نقانق، فلفل حار، زيتون، جبنة",
+            "en": "Sauce, tuna, sausage, chili, olives, cheese"
+          },
+          "image": "https://images.unsplash.com/photo-1599321955726-e048426594af?w=360&q=70&auto=format&fit=crop&h=360",
+          "prices": [
+            {
+              "label": "",
+              "price": "20"
+            }
+          ]
+        },
+        {
+          "name": {
+            "ar": "سبايسي تشكن",
+            "en": "Spicy Chicken"
+          },
+          "description": {
+            "ar": "صلصة، دجاج، فلفل حار، ذرة، جبنة",
+            "en": "Sauce, chicken, chili, corn, cheese"
+          },
+          "image": "https://images.unsplash.com/photo-1615719413546-198b25453f85?w=360&q=70&auto=format&fit=crop&h=360",
+          "prices": [
+            {
+              "label": "",
+              "price": "22"
+            }
+          ]
+        },
+        {
+          "name": {
+            "ar": "بولونيا",
+            "en": "Bologna"
+          },
+          "description": {
+            "ar": "صلصة، دجاج، طماطم، فلفل، زيتون، جبنة",
+            "en": "Sauce, chicken, tomato, pepper, olives, cheese"
+          },
+          "image": "https://images.unsplash.com/photo-1662805525084-79fd48e09e0b?w=360&q=70&auto=format&fit=crop&h=360",
+          "prices": [
+            {
+              "label": "",
+              "price": "22"
+            }
+          ]
+        },
+        {
+          "name": {
+            "ar": "كباب",
+            "en": "Kebab"
+          },
+          "description": {
+            "ar": "صلصة، كباب، طماطم، فلفل، جبنة",
+            "en": "Sauce, kebab, tomato, pepper, cheese"
+          },
+          "image": "https://images.unsplash.com/photo-1672856399643-47ddf6b2d6d6?w=360&q=70&auto=format&fit=crop&h=360",
+          "prices": [
+            {
+              "label": "",
+              "price": "25"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "matabeqa",
+      "name": {
+        "ar": "مطبقة مكس",
+        "en": "Matabeqa Mix"
+      },
+      "variant": "matabeqa",
+      "bannerImage": "images/banner-matabeqa.jpg",
+      "bannerPosition": "center 55%",
+      "itemTag": {
+        "ar": "⚠ مطبقة",
+        "en": "⚠ Matabeqa"
+      },
+      "items": [
+        {
+          "name": {
+            "ar": "مطبقة مكس فقاع",
+            "en": "Mix Matabeqa Mushroom"
+          },
+          "description": {
+            "ar": "جبنة، صالصة، فقاع",
+            "en": "Cheese, sauce, mushroom"
+          },
+          "image": "images/matabeqa-mushroom.jpg"
+        },
+        {
+          "name": {
+            "ar": "مطبقة مكس خضار",
+            "en": "Mix Matabeqa Veggie"
+          },
+          "description": {
+            "ar": "جبنة، صالصة، خضار",
+            "en": "Cheese, sauce, vegetables"
+          },
+          "image": "images/matabeqa-veggie.jpg"
+        },
+        {
+          "name": {
+            "ar": "مطبقة مكس تونة",
+            "en": "Mix Matabeqa Tuna"
+          },
+          "description": {
+            "ar": "جبنة، صالصة، تونة",
+            "en": "Cheese, sauce, tuna"
+          },
+          "image": "images/matabeqa-tuna.jpg"
+        },
+        {
+          "name": {
+            "ar": "مطبقة مكس تونة + فقاع",
+            "en": "Mix Matabeqa Tuna + Mushroom"
+          },
+          "description": {
+            "ar": "جبنة، صالصة، تونة، فقاع",
+            "en": "Cheese, sauce, tuna, mushroom"
+          },
+          "image": "images/matabeqa-tuna.jpg"
+        },
+        {
+          "name": {
+            "ar": "مطبقة مكس دجاج",
+            "en": "Mix Matabeqa Chicken"
+          },
+          "description": {
+            "ar": "جبنة، صالصة، دجاج",
+            "en": "Cheese, sauce, chicken"
+          },
+          "image": "images/matabeqa-chicken.jpg"
+        },
+        {
+          "name": {
+            "ar": "مطبقة مكس كباب",
+            "en": "Mix Matabeqa Kebab"
+          },
+          "description": {
+            "ar": "جبنة، صالصة، كباب",
+            "en": "Cheese, sauce, kebab"
+          },
+          "image": "images/matabeqa-kebab.jpg"
+        }
+      ]
+    }
+  ],
+  "addons": {
+    "title": {
+      "ar": "الإضافات",
+      "en": "Add-ons"
+    },
+    "items": [
+      {
+        "name": {
+          "ar": "بطاطا مقلية",
+          "en": "French Fries"
+        },
+        "image": "https://images.unsplash.com/photo-1665117861973-fffa50c1afec?w=360&q=70&auto=format&fit=crop&h=360",
+        "prices": [
+          {
+            "label": "",
+            "price": "7"
+          }
+        ]
+      },
+      {
+        "name": {
+          "ar": "بيبسي",
+          "en": "Pepsi"
+        },
+        "image": "https://images.unsplash.com/photo-1629203851122-3726ecdf080e?w=360&q=70&auto=format&fit=crop&h=360",
+        "prices": [
+          {
+            "label": "",
+            "price": "4"
+          }
+        ]
+      },
+      {
+        "name": {
+          "ar": "كوكاكولا",
+          "en": "Coca-Cola"
+        },
+        "image": "https://images.unsplash.com/photo-1716800586014-fea19e9453fb?w=360&q=70&auto=format&fit=crop&h=360",
+        "prices": [
+          {
+            "label": "",
+            "price": "4"
+          }
+        ]
+      },
+      {
+        "name": {
+          "ar": "سبرايت",
+          "en": "Sprite"
+        },
+        "image": "https://images.unsplash.com/photo-1690988109041-458628590a9e?w=360&q=70&auto=format&fit=crop&h=360",
+        "prices": [
+          {
+            "label": "",
+            "price": "4"
+          }
+        ]
+      },
+      {
+        "name": {
+          "ar": "مياه",
+          "en": "Water"
+        },
+        "image": "https://images.unsplash.com/photo-1523362628745-0c100150b504?w=360&q=70&auto=format&fit=crop&h=360",
+        "prices": [
+          {
+            "label": "",
+            "price": "1"
+          }
+        ]
+      },
+      {
+        "name": {
+          "ar": "عصير علبة",
+          "en": "Juice Box"
+        },
+        "image": "https://images.unsplash.com/photo-1788377254039-7d4f5704e831?w=360&q=70&auto=format&fit=crop&h=360",
+        "prices": [
+          {
+            "label": "",
+            "price": "1.5"
+          }
+        ]
+      }
+    ]
+  }
+}

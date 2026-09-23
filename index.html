@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Pure Fire — Menu</title>
+  <meta name="description" content="بيور فاير — منيو وجبات سريعة، طرابلس" />
+  <meta name="theme-color" content="#0a0a0a" id="meta-theme" />
+  <!-- Cafe shown at the bare domain (yoursite.pages.dev/) -->
+  <meta name="default-cafe" content="pure-fire" />
+  <link rel="icon" type="image/jpeg" href="cafes/pure-fire/images/logo.jpg" />
+  <link rel="apple-touch-icon" href="cafes/pure-fire/images/logo.jpg" />
+
+  <!-- Fonts: Russo One (EN headings), Roboto (EN body), Cairo (Arabic) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Roboto:wght@400;500;700&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="cafes/pure-fire/theme.css" />
+  <style>html, body { background: #0a0a0a; color: #e5e7eb; }</style>
+</head>
+<body>
+  <div class="shell">
+
+    <!-- 1 · Cover banner (photo + brand overlay, rendered by app.js) -->
+    <header id="cover" class="cover" hidden></header>
+
+    <!-- 2 · Identity: name + subtitle. Moved onto the cover when there is one -->
+    <section id="identity" class="identity" hidden>
+      <h1 id="cafe-name" class="cafe-name"></h1>
+      <p id="cafe-subtitle" class="cafe-subtitle"></p>
+    </section>
+
+    <!-- Locations + social injected here by app.js -->
+
+    <!-- 3 · Sticky category tabs + search -->
+    <nav id="tabsbar" class="tabsbar" hidden aria-label="أقسام القائمة">
+      <button id="search-btn" class="search-btn" aria-label="بحث في القائمة" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+        </svg>
+      </button>
+      <div id="tabs" class="tabs" role="tablist"></div>
+      <div id="searchbox" class="searchbox" hidden>
+        <input id="search-input" type="search"
+          placeholder="ابحث عن منتج…"
+          autocomplete="off" aria-label="بحث في القائمة" />
+        <button id="search-close" class="search-close" aria-label="إغلاق البحث">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" aria-hidden="true">
+            <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+          </svg>
+        </button>
+      </div>
+    </nav>
+
+    <!-- 4–5 · Category banner + item list (rendered by app.js) -->
+    <main id="menu" class="menu">
+      <!-- loading skeleton -->
+      <div class="cat-skel" aria-hidden="true">
+        <div class="skel skel-banner"></div>
+        <div class="skel-grid">
+          <div class="skel skel-card"></div>
+          <div class="skel skel-card"></div>
+          <div class="skel skel-card"></div>
+          <div class="skel skel-card"></div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Error state -->
+    <section id="error" class="error" hidden>
+      <svg class="error-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/>
+        <path d="M12 9v4"/><path d="M12 17h.01"/>
+      </svg>
+      <h2>القائمة غير متاحة</h2>
+      <p id="error-detail"></p>
+      <p class="error-hint">إذا فتحت الملف مباشرةً من القرص، المتصفح يمنع تحميل JSON —
+        استخدم <code>npx serve .</code> ثم افتح الصفحة الرئيسية</p>
+    </section>
+
+    <footer class="foot" id="foot" hidden>
+      <span class="foot-rule"></span>
+      <p id="foot-text"></p>
+    </footer>
+  </div>
+
+  <script src="cafes/pure-fire/menu-data.js" defer></script>
+  <script src="app.js" defer></script>
+</body>
+</html>

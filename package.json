@@ -1,0 +1,16 @@
+{
+  "name": "qr-menu-system",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Reusable static restaurant/cafe QR menu — one JSON + one images folder per cafe.",
+  "scripts": {
+    "qr": "node generate-qr.js",
+    "serve": "npx serve ."
+  },
+  "dependencies": {
+    "qrcode": "^1.5.4"
+  },
+  "devDependencies": {
+    "serve": "^14.2.3"
+  }
+}
