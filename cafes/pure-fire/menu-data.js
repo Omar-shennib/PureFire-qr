@@ -9,7 +9,7 @@ window.MENU_DATA = {
     "ar": "وجبات سريعة",
     "en": "Fast Food"
   },
-  "logo": "images/logo.jpg",
+  "logo": "images/logo-2.jpg",
   "tagline": {
     "ar": "لذيذ بشكل خطير. تقدّم بحذر.",
     "en": "Dangerously delicious. Proceed with caution."
@@ -33,18 +33,6 @@ window.MENU_DATA = {
   },
   "layout": "rows",
   "timeZone": "Africa/Tripoli",
-  "hours": {
-    "open": 17,
-    "close": 3,
-    "openText": {
-      "ar": "مفتوح الآن — 5م إلى 3ص",
-      "en": "OPEN NOW — 5PM TO 3AM"
-    },
-    "closedText": {
-      "ar": "مغلق — يفتح الساعة 5م",
-      "en": "CLOSED — OPENS AT 5PM"
-    }
-  },
   "ui": {
     "ar": {
       "search": "🔍 ابحث في القائمة...",
@@ -56,10 +44,6 @@ window.MENU_DATA = {
       "none": "No items match",
       "branches": "☢ Find us"
     }
-  },
-  "menuNote": {
-    "ar": "⚠ جميع الأصناف حسب التوفر ⚠",
-    "en": "⚠ ALL ITEMS SUBJECT TO AVAILABILITY ⚠"
   },
   "locations": [
     {
@@ -83,6 +67,8 @@ window.MENU_DATA = {
     }
   ],
   "social": {
+    "instagram": "https://www.instagram.com/pure_fire_55_",
+    "tiktok": "https://www.tiktok.com/@pure.fire0",
     "facebook": "https://www.facebook.com/share/17vSCLPFZK/?mibextid=wwXIfr"
   },
   "footerText": {
@@ -111,8 +97,8 @@ window.MENU_DATA = {
             "en": "Maqluba Chicken"
           },
           "description": {
-            "ar": "دجاج مشوي، طماطم، فلفل، بصل، زيتون، ملفوف، جرجير، سلطة مشوية، بطاطا، صوص، جبنة موزاريلا، جبنة شيدر",
-            "en": "Grilled chicken, tomato, pepper, onion, olives, cabbage, arugula, grilled salad, potatoes, sauce, mozzarella, cheddar"
+            "ar": "دجاج مشوي، سلطة، سلطة مشوية، بطاطا، كاتشب، هريسة، صوص ثوم، صوص جبنة، صوص ساموراي، جبنة موزاريلا، جبنة شيدر",
+            "en": "Grilled chicken, salad, grilled salad, potatoes, ketchup, harissa, garlic sauce, cheese sauce, samurai sauce, mozzarella, cheddar"
           },
           "image": "images/maqluba-chicken.jpg",
           "prices": [
@@ -128,8 +114,8 @@ window.MENU_DATA = {
             "en": "Maqluba Kebab"
           },
           "description": {
-            "ar": "كباب، طماطم، فلفل، بصل، زيتون، ملفوف، جرجير، سلطة مشوية، بطاطا، صوص، جبنة موزاريلا، جبنة شيدر",
-            "en": "Kebab, tomato, pepper, onion, olives, cabbage, arugula, grilled salad, potatoes, sauce, mozzarella, cheddar"
+            "ar": "كباب، سلطة، سلطة مشوية، بطاطا، كاتشب، هريسة، صوص ثوم، صوص جبنة، صوص ساموراي، جبنة موزاريلا، جبنة شيدر",
+            "en": "Kebab, salad, grilled salad, potatoes, ketchup, harissa, garlic sauce, cheese sauce, samurai sauce, mozzarella, cheddar"
           },
           "image": "images/maqluba-chicken.jpg",
           "prices": [
@@ -141,12 +127,46 @@ window.MENU_DATA = {
         },
         {
           "name": {
+            "ar": "مقلوبة دجاج بوكس",
+            "en": "Maqluba Chicken Box"
+          },
+          "description": {
+            "ar": "دجاج مشوي، سلطة، سلطة مشوية، بطاطا، كاتشب، هريسة، صوص ثوم، صوص جبنة، صوص ساموراي، جبنة موزاريلا، جبنة شيدر",
+            "en": "Grilled chicken, salad, grilled salad, potatoes, ketchup, harissa, garlic sauce, cheese sauce, samurai sauce, mozzarella, cheddar"
+          },
+          "image": "images/maqluba-chicken.jpg",
+          "prices": [
+            {
+              "label": "",
+              "price": "23"
+            }
+          ]
+        },
+        {
+          "name": {
+            "ar": "مقلوبة كباب بوكس",
+            "en": "Maqluba Kebab Box"
+          },
+          "description": {
+            "ar": "كباب، سلطة، سلطة مشوية، بطاطا، كاتشب، هريسة، صوص ثوم، صوص جبنة، صوص ساموراي، جبنة موزاريلا، جبنة شيدر",
+            "en": "Kebab, salad, grilled salad, potatoes, ketchup, harissa, garlic sauce, cheese sauce, samurai sauce, mozzarella, cheddar"
+          },
+          "image": "images/maqluba-chicken.jpg",
+          "prices": [
+            {
+              "label": "",
+              "price": "25"
+            }
+          ]
+        },
+        {
+          "name": {
             "ar": "باقيت دجاج",
             "en": "Baguette Chicken"
           },
           "description": {
-            "ar": "دجاج مشوي، طماطم، فلفل، بصل، زيتون، ملفوف، جرجير، سلطة مشوية، بطاطا، صوص، جبنة موزاريلا، جبنة شيدر",
-            "en": "Grilled chicken, tomato, pepper, onion, olives, cabbage, arugula, grilled salad, potatoes, sauce, mozzarella, cheddar"
+            "ar": "دجاج مشوي، سلطة، سلطة مشوية، بطاطا، كاتشب، هريسة، صوص ثوم، صوص جبنة، صوص ساموراي، جبنة موزاريلا، جبنة شيدر",
+            "en": "Grilled chicken, salad, grilled salad, potatoes, ketchup, harissa, garlic sauce, cheese sauce, samurai sauce, mozzarella, cheddar"
           },
           "image": "images/baguette-kebab.jpg",
           "prices": [
@@ -162,8 +182,8 @@ window.MENU_DATA = {
             "en": "Baguette Kebab"
           },
           "description": {
-            "ar": "كباب، طماطم، فلفل، بصل، زيتون، ملفوف، جرجير، سلطة مشوية، بطاطا، صوص، جبنة موزاريلا، جبنة شيدر",
-            "en": "Kebab, tomato, pepper, onion, olives, cabbage, arugula, grilled salad, potatoes, sauce, mozzarella, cheddar"
+            "ar": "كباب، سلطة، سلطة مشوية، بطاطا، كاتشب، هريسة، صوص ثوم، صوص جبنة، صوص ساموراي، جبنة موزاريلا، جبنة شيدر",
+            "en": "Kebab, salad, grilled salad, potatoes, ketchup, harissa, garlic sauce, cheese sauce, samurai sauce, mozzarella, cheddar"
           },
           "image": "images/baguette-kebab.jpg",
           "prices": [
@@ -179,8 +199,8 @@ window.MENU_DATA = {
             "en": "Flaming Chicken"
           },
           "description": {
-            "ar": "دجاج مشوي، طماطم، فلفل حار، بصل، زيتون، ملفوف، جرجير، سلطة مشوية، بطاطا، صوص، جبنة موزاريلا، جبنة شيدر",
-            "en": "Grilled chicken, tomato, chili, onion, olives, cabbage, arugula, grilled salad, potatoes, sauce, mozzarella, cheddar"
+            "ar": "دجاج مشوي، فلفل حار، سلطة، سلطة مشوية، بطاطا، كاتشب، هريسة، صوص ثوم، صوص جبنة، صوص ساموراي، جبنة موزاريلا، جبنة شيدر",
+            "en": "Grilled chicken, chili, salad, grilled salad, potatoes, ketchup, harissa, garlic sauce, cheese sauce, samurai sauce, mozzarella, cheddar"
           },
           "image": "images/flaming-chicken.jpg",
           "prices": [
@@ -196,8 +216,8 @@ window.MENU_DATA = {
             "en": "Flaming Kebab"
           },
           "description": {
-            "ar": "كباب، طماطم، فلفل حار، بصل، زيتون، ملفوف، جرجير، سلطة مشوية، بطاطا، صوص، جبنة موزاريلا، جبنة شيدر",
-            "en": "Kebab, tomato, chili, onion, olives, cabbage, arugula, grilled salad, potatoes, sauce, mozzarella, cheddar"
+            "ar": "كباب، فلفل حار، سلطة، سلطة مشوية، بطاطا، كاتشب، هريسة، صوص ثوم، صوص جبنة، صوص ساموراي، جبنة موزاريلا، جبنة شيدر",
+            "en": "Kebab, chili, salad, grilled salad, potatoes, ketchup, harissa, garlic sauce, cheese sauce, samurai sauce, mozzarella, cheddar"
           },
           "image": "images/flaming-chicken.jpg",
           "prices": [
@@ -213,8 +233,8 @@ window.MENU_DATA = {
             "en": "Lebanese Chicken"
           },
           "description": {
-            "ar": "دجاج مشوي، طماطم، فلفل، بصل، زيتون، ملفوف، جرجير، سلطة مشوية، بطاطا، صوص، ثلاثة أنواع جبنة",
-            "en": "Grilled chicken, tomato, pepper, onion, olives, cabbage, arugula, grilled salad, potatoes, sauce, three types of cheese"
+            "ar": "دجاج مشوي، سلطة، سلطة مشوية، بطاطا، كاتشب، هريسة، صوص ثوم، صوص جبنة، صوص ساموراي، ثلاثة أنواع جبنة، جبنة شرايح",
+            "en": "Grilled chicken, salad, grilled salad, potatoes, ketchup, harissa, garlic sauce, cheese sauce, samurai sauce, three types of cheese, cheese slices"
           },
           "image": "images/lebanese-chicken.jpg",
           "prices": [
@@ -230,10 +250,50 @@ window.MENU_DATA = {
             "en": "Lebanese Kebab"
           },
           "description": {
-            "ar": "كباب، طماطم، فلفل، بصل، زيتون، ملفوف، جرجير، سلطة مشوية، بطاطا، صوص، ثلاثة أنواع جبنة",
-            "en": "Kebab, tomato, pepper, onion, olives, cabbage, arugula, grilled salad, potatoes, sauce, three types of cheese"
+            "ar": "كباب، سلطة، سلطة مشوية، بطاطا، كاتشب، هريسة، صوص ثوم، صوص جبنة، صوص ساموراي، ثلاثة أنواع جبنة، جبنة شرايح",
+            "en": "Kebab, salad, grilled salad, potatoes, ketchup, harissa, garlic sauce, cheese sauce, samurai sauce, three types of cheese, cheese slices"
           },
-          "image": "images/lebanese-chicken.jpg"
+          "image": "images/lebanese-chicken.jpg",
+          "prices": [
+            {
+              "label": "",
+              "price": "28"
+            }
+          ]
+        },
+        {
+          "name": {
+            "ar": "لفايف بيور دجاج",
+            "en": "Pure Wraps Chicken"
+          },
+          "image": "images/pure-wraps-2.jpg",
+          "prices": [
+            {
+              "label": "",
+              "price": "23"
+            }
+          ],
+          "description": {
+            "ar": "دجاج مشوي، سلطة، سلطة مشوية، بطاطا، كاتشب، هريسة، صوص ثوم، صوص جبنة، صوص ساموراي، جبنة موزاريلا، جبنة شيدر",
+            "en": "Grilled chicken, salad, grilled salad, potatoes, ketchup, harissa, garlic sauce, cheese sauce, samurai sauce, mozzarella, cheddar"
+          }
+        },
+        {
+          "name": {
+            "ar": "لفايف بيور كباب",
+            "en": "Pure Wraps Kebab"
+          },
+          "image": "images/pure-wraps-2.jpg",
+          "prices": [
+            {
+              "label": "",
+              "price": "25"
+            }
+          ],
+          "description": {
+            "ar": "كباب، سلطة، سلطة مشوية، بطاطا، كاتشب، هريسة، صوص ثوم، صوص جبنة، صوص ساموراي، جبنة موزاريلا، جبنة شيدر",
+            "en": "Kebab, salad, grilled salad, potatoes, ketchup, harissa, garlic sauce, cheese sauce, samurai sauce, mozzarella, cheddar"
+          }
         },
         {
           "name": {
@@ -241,10 +301,10 @@ window.MENU_DATA = {
             "en": "Calzone Chicken"
           },
           "description": {
-            "ar": "دجاج مشوي، طماطم، فلفل، بصل، زيتون، خضار، ملفوف، جرجير، سلطة مشوية، بطاطا، صوص، جبنة",
-            "en": "Grilled chicken, tomato, pepper, onion, olives, vegetables, cabbage, arugula, grilled salad, potatoes, sauce, cheese"
+            "ar": "دجاج مشوي، خضار، سلطة، سلطة مشوية، بطاطا، كاتشب، هريسة، صوص ثوم، صوص جبنة، صوص ساموراي، جبنة",
+            "en": "Grilled chicken, vegetables, salad, grilled salad, potatoes, ketchup, harissa, garlic sauce, cheese sauce, samurai sauce, cheese"
           },
-          "image": "https://images.unsplash.com/photo-1753656681797-3234c89d6d4d?w=360&q=70&auto=format&fit=crop&h=360",
+          "image": "images/calzone.jpg",
           "prices": [
             {
               "label": "",
@@ -258,10 +318,10 @@ window.MENU_DATA = {
             "en": "Calzone Kebab"
           },
           "description": {
-            "ar": "كباب، طماطم، فلفل، بصل، زيتون، خضار، ملفوف، جرجير، سلطة مشوية، بطاطا، صوص، جبنة",
-            "en": "Kebab, tomato, pepper, onion, olives, vegetables, cabbage, arugula, grilled salad, potatoes, sauce, cheese"
+            "ar": "كباب، خضار، سلطة، سلطة مشوية، بطاطا، كاتشب، هريسة، صوص ثوم، صوص جبنة، صوص ساموراي، جبنة",
+            "en": "Kebab, vegetables, salad, grilled salad, potatoes, ketchup, harissa, garlic sauce, cheese sauce, samurai sauce, cheese"
           },
-          "image": "https://images.unsplash.com/photo-1753656681797-3234c89d6d4d?w=360&q=70&auto=format&fit=crop&h=360",
+          "image": "images/calzone.jpg",
           "prices": [
             {
               "label": "",
@@ -470,14 +530,20 @@ window.MENU_DATA = {
       "items": [
         {
           "name": {
-            "ar": "مطبقة مكس فقاع",
-            "en": "Mix Matabeqa Mushroom"
+            "ar": "مطبقة مكس مارجاريتا",
+            "en": "Mix Matabeqa Margherita"
           },
           "description": {
-            "ar": "جبنة، صالصة، فقاع",
-            "en": "Cheese, sauce, mushroom"
+            "ar": "جبنة، صالصة",
+            "en": "Cheese, sauce"
           },
-          "image": "images/matabeqa-mushroom.jpg"
+          "image": "images/matabeqa-mushroom.jpg",
+          "prices": [
+            {
+              "label": "",
+              "price": "10"
+            }
+          ]
         },
         {
           "name": {
@@ -488,7 +554,13 @@ window.MENU_DATA = {
             "ar": "جبنة، صالصة، خضار",
             "en": "Cheese, sauce, vegetables"
           },
-          "image": "images/matabeqa-veggie.jpg"
+          "image": "images/matabeqa-veggie.jpg",
+          "prices": [
+            {
+              "label": "",
+              "price": "11"
+            }
+          ]
         },
         {
           "name": {
@@ -499,18 +571,13 @@ window.MENU_DATA = {
             "ar": "جبنة، صالصة، تونة",
             "en": "Cheese, sauce, tuna"
           },
-          "image": "images/matabeqa-tuna.jpg"
-        },
-        {
-          "name": {
-            "ar": "مطبقة مكس تونة + فقاع",
-            "en": "Mix Matabeqa Tuna + Mushroom"
-          },
-          "description": {
-            "ar": "جبنة، صالصة، تونة، فقاع",
-            "en": "Cheese, sauce, tuna, mushroom"
-          },
-          "image": "images/matabeqa-tuna.jpg"
+          "image": "images/matabeqa-tuna.jpg",
+          "prices": [
+            {
+              "label": "",
+              "price": "13"
+            }
+          ]
         },
         {
           "name": {
@@ -521,7 +588,13 @@ window.MENU_DATA = {
             "ar": "جبنة، صالصة، دجاج",
             "en": "Cheese, sauce, chicken"
           },
-          "image": "images/matabeqa-chicken.jpg"
+          "image": "images/matabeqa-chicken.jpg",
+          "prices": [
+            {
+              "label": "",
+              "price": "15"
+            }
+          ]
         },
         {
           "name": {
@@ -532,7 +605,13 @@ window.MENU_DATA = {
             "ar": "جبنة، صالصة، كباب",
             "en": "Cheese, sauce, kebab"
           },
-          "image": "images/matabeqa-kebab.jpg"
+          "image": "images/matabeqa-kebab.jpg",
+          "prices": [
+            {
+              "label": "",
+              "price": "17"
+            }
+          ]
         }
       ]
     }
@@ -578,7 +657,7 @@ window.MENU_DATA = {
         "prices": [
           {
             "label": "",
-            "price": "4"
+            "price": "3"
           }
         ]
       },
@@ -591,7 +670,7 @@ window.MENU_DATA = {
         "prices": [
           {
             "label": "",
-            "price": "4"
+            "price": "3"
           }
         ]
       },
@@ -622,5 +701,7 @@ window.MENU_DATA = {
         ]
       }
     ]
-  }
+  },
+  "cart": true,
+  "visitLayout": "info"
 };

@@ -759,3 +759,327 @@ img { display: block; max-width: 100%; }
 .items--tiles .ibody h3 { font-size: 13.5px; line-height: 1.3; }
 .items--tiles .prices { padding-top: 4px; }
 .items--tiles .price .amount { font-size: 16px; }
+
+/* ============================================================
+   Cart + invoice ("cart": true)
+   ============================================================ */
+
+/* price + add button share a row at the bottom of each card */
+.ibuy {
+  margin-top: auto;
+  padding-top: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.ibuy .prices { margin: 0; padding: 0; }
+.items--tiles .ibuy { flex-wrap: wrap; padding-top: 4px; gap: 6px; }
+
+.add-ctl {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  margin-inline-start: auto;
+}
+.add-btn, .qty-btn {
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--accent-ink);
+  cursor: pointer;
+  transition: transform .15s, filter .2s;
+}
+.add-btn { width: 36px; height: 36px; }
+.qty-btn { width: 28px; height: 28px; }
+.add-btn svg { width: 18px; height: 18px; }
+.qty-btn svg { width: 14px; height: 14px; }
+.add-btn:active, .qty-btn:active { transform: scale(.88); }
+.add-btn:hover, .qty-btn:hover { filter: brightness(1.1); }
+.add-btn:focus-visible, .qty-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.add-ctl.is-on {
+  gap: 6px;
+  padding: 3px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  animation: riseIn .25s var(--ease);
+}
+.qty {
+  min-width: 18px;
+  text-align: center;
+  font-weight: 800;
+  font-size: 15px;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+.items--tiles .add-btn { width: 32px; height: 32px; }
+
+/* floating bar: count · "view invoice" · total */
+.cartbar {
+  position: fixed;
+  z-index: 40;
+  inset-inline: 0;
+  bottom: 0;
+  max-width: var(--shell-w);
+  margin-inline: auto;
+  padding: 10px 14px calc(12px + env(safe-area-inset-bottom));
+  pointer-events: none;
+}
+.cartbar-btn {
+  pointer-events: auto;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 16px;
+  border: 0;
+  border-radius: 16px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font: 700 15px/1.2 var(--font-body);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, .35);
+  cursor: pointer;
+  animation: riseIn .35s var(--ease);
+}
+.cartbar-btn.bump { animation: cartBump .35s var(--ease); }
+@keyframes cartBump { 40% { transform: scale(1.03); } }
+.cartbar-count {
+  min-width: 30px; height: 30px;
+  padding: 0 8px;
+  border-radius: 999px;
+  display: grid; place-items: center;
+  background: rgba(255, 255, 255, .22);
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+.cartbar-label { flex: 1; text-align: start; }
+.cartbar-total { font-weight: 800; white-space: nowrap; }
+body.has-cart .shell { padding-bottom: 86px; }
+
+/* invoice sheet */
+body.invoice-open { overflow: hidden; }
+.invoice {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+.invoice-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, .62);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  animation: fadeIn .25s ease;
+}
+@keyframes fadeIn { from { opacity: 0; } }
+.invoice-sheet {
+  position: relative;
+  width: 100%;
+  max-width: 460px;
+  max-height: 94dvh;
+  overflow-y: auto;
+  padding: 54px 16px calc(20px + env(safe-area-inset-bottom));
+  animation: sheetUp .35s var(--ease);
+}
+@keyframes sheetUp { from { transform: translateY(48px); opacity: 0; } }
+.invoice-close {
+  position: absolute;
+  z-index: 2;
+  top: 8px;
+  inset-inline-end: 16px;
+  width: 38px; height: 38px;
+  display: grid; place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: #fff;
+  color: #1f1a17;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, .3);
+}
+.invoice-close svg { width: 18px; height: 18px; }
+.invoice-paper { filter: drop-shadow(0 18px 34px rgba(0, 0, 0, .45)); }
+
+/* the paper slip — zig-zag torn edges top and bottom */
+.receipt {
+  --ink-r: #1f1a17;
+  --muted-r: #7a7068;
+  --rule-r: rgba(31, 26, 23, .2);
+  position: relative;
+  padding: 28px 20px 26px;
+  background: #fffdf8;
+  color: var(--ink-r);
+  font-family: var(--font-body);
+  -webkit-mask:
+    conic-gradient(from 135deg at top, #0000, #000 1deg 89deg, #0000 90deg) top / 18px 51% repeat-x,
+    conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) bottom / 18px 51% repeat-x;
+          mask:
+    conic-gradient(from 135deg at top, #0000, #000 1deg 89deg, #0000 90deg) top / 18px 51% repeat-x,
+    conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) bottom / 18px 51% repeat-x;
+}
+.receipt-head {
+  text-align: center;
+  padding-bottom: 14px;
+  border-bottom: 2px dashed var(--rule-r);
+}
+.receipt-logo {
+  width: 64px; height: 64px;
+  margin: 0 auto 8px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.receipt-name { font: 400 26px/1.1 var(--font-brand); color: var(--ink-r); }
+.receipt-sub {
+  margin-top: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--muted-r);
+}
+.receipt-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 14px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted-r);
+  font-variant-numeric: tabular-nums;
+}
+.receipt-lines {
+  width: 100%;
+  margin: 8px 0 4px;
+  border-collapse: collapse;
+  font-size: 13.5px;
+}
+.receipt-lines th {
+  padding: 8px 0 6px;
+  font-size: 11px;
+  font-weight: 700;
+  text-align: start;
+  color: var(--muted-r);
+  border-bottom: 1px solid var(--rule-r);
+}
+.receipt-lines th:nth-child(2), .receipt-lines td:nth-child(2) { text-align: center; padding-inline: 6px; }
+.receipt-lines th:last-child, .receipt-lines td:last-child { text-align: end; }
+.receipt-lines td {
+  padding: 10px 0;
+  vertical-align: middle;
+  border-bottom: 1px dashed var(--rule-r);
+}
+.rl-name { font-weight: 700; line-height: 1.35; }
+.rl-unit { margin-top: 2px; font-size: 11.5px; color: var(--muted-r); font-variant-numeric: tabular-nums; }
+.rl-sum { font-weight: 800; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.receipt-lines td.rl-del { width: 1%; padding-inline-start: 8px; }
+.del-btn {
+  width: 32px; height: 32px;
+  display: grid; place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(220, 38, 38, .1);
+  color: #dc2626;
+  cursor: pointer;
+  transition: background .2s, transform .15s;
+}
+.del-btn svg { width: 16px; height: 16px; }
+.del-btn:hover { background: rgba(220, 38, 38, .18); }
+.del-btn:active { transform: scale(.88); }
+.del-btn:focus-visible { outline: 2px solid #dc2626; outline-offset: 2px; }
+.receipt .add-ctl { margin: 0; }
+.receipt .add-ctl.is-on { background: rgba(31, 26, 23, .07); }
+.receipt .qty { color: var(--ink-r); }
+.receipt-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-top: 6px;
+  padding-top: 12px;
+  border-top: 2px dashed var(--rule-r);
+  font-size: 15px;
+  font-weight: 800;
+}
+.receipt-total strong {
+  font-size: 26px;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+.receipt-count { margin-top: 2px; font-size: 12px; color: var(--muted-r); }
+.receipt-empty { padding: 30px 0 10px; text-align: center; color: var(--muted-r); font-size: 14px; }
+
+/* print / save as PDF: just the slip */
+@media print {
+  body > *:not(#invoice) { display: none !important; }
+  body { background: #fff !important; }
+  .invoice { position: static; display: block !important; }
+  .invoice-backdrop, .no-print, .receipt .qty-btn, .del-btn { display: none !important; }
+  .invoice-sheet { max-height: none; overflow: visible; padding: 0; animation: none; }
+  .invoice-paper { filter: none; }
+  .receipt { -webkit-mask: none; mask: none; }
+  .receipt .add-ctl.is-on { background: none; }
+}
+
+/* "visitLayout": "info" — detail rows + call buttons */
+.visit--info .visit-title { margin-bottom: 10px; }
+.info-block { display: flex; flex-direction: column; gap: 8px; }
+.info-block + .info-block { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line); }
+.info-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--ink) 5%, transparent);
+  color: inherit;
+  text-decoration: none;
+}
+a.info-row { transition: background .2s; }
+a.info-row:hover { background: color-mix(in srgb, var(--accent) 12%, transparent); }
+.info-ic {
+  flex: 0 0 auto;
+  width: 38px; height: 38px;
+  border-radius: 10px;
+  display: grid; place-items: center;
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+.info-ic svg { width: 18px; height: 18px; }
+.info-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+.info-label { font-size: 11.5px; font-weight: 700; color: var(--muted); }
+.info-val { font-size: 14px; font-weight: 600; line-height: 1.45; color: var(--ink); }
+.info-go { flex: 0 0 auto; color: var(--muted); display: grid; }
+.info-go svg { width: 18px; height: 18px; }
+:root[dir="rtl"] .info-go svg { transform: scaleX(-1); }
+.info-calls { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; }
+.info-call {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 10px;
+  border-radius: 12px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font: 700 15px "Jost", var(--font-body);
+  letter-spacing: .03em;
+  text-decoration: none;
+  direction: ltr;
+  transition: transform .15s, filter .2s;
+}
+.info-call svg { width: 16px; height: 16px; }
+.info-call:hover { filter: brightness(1.08); }
+.info-call:active { transform: scale(.97); }
+.follow-label {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--muted);
+}
+.visit--info .follow-label + .social-row { margin-top: 10px; padding-top: 0; border-top: 0; }

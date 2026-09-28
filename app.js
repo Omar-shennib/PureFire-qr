@@ -3,7 +3,8 @@
    Supports: RTL, bilingual text ({ "ar": "…", "en": "…" } + a
    language toggle), per-cafe stylesheet + fonts, logo, live
    opening-hours pill, tagline, branches panel, social links,
-   no-price items, per-cafe themeColor.
+   no-price items, per-cafe themeColor, and an optional cart that
+   builds an on-screen invoice ("cart": true).
    ============================================================ */
 
 const $ = (sel) => document.querySelector(sel);
@@ -41,7 +42,21 @@ const UI = {
     none: 'لا توجد نتائج لـ "{q}"',
     soon: "قريباً — ترقبوا المزيد",
     branches: "فروعنا",
+    address: "العنوان",
+    openHours: "أوقات العمل",
+    follow: "تابعنا",
     toggle: "AR",
+    add: "أضف",
+    viewInvoice: "عرض الفاتورة",
+    invoice: "فاتورة",
+    item: "الصنف",
+    qty: "الكمية",
+    amount: "المبلغ",
+    total: "الإجمالي",
+    pieces: "عدد القطع",
+    empty: "الفاتورة فارغة — أضف أصنافاً من القائمة",
+    close: "إغلاق",
+    remove: "حذف",
   },
   en: {
     search: "Search the menu…",
@@ -49,7 +64,21 @@ const UI = {
     none: 'No items match "{q}"',
     soon: "Coming soon",
     branches: "Visit us",
+    address: "Address",
+    openHours: "Opening hours",
+    follow: "Follow us",
     toggle: "EN",
+    add: "Add",
+    viewInvoice: "View invoice",
+    invoice: "Invoice",
+    item: "Item",
+    qty: "Qty",
+    amount: "Amount",
+    total: "Total",
+    pieces: "Items",
+    empty: "Your invoice is empty — add items from the menu",
+    close: "Close",
+    remove: "Remove",
   },
 };
 
@@ -122,6 +151,8 @@ function itemHtml(item, cat, inSearch) {
   const hasPriceValues = prices.some((p) => p.price && String(p.price).trim());
   const name = tx(item.name);
   const tag = cat.itemTag ? tx(cat.itemTag) : (inSearch ? tx(cat.name) : "");
+  // cart: only items with a numeric price can be added
+  const key = DATA.cart && unitPrice(item) != null ? itemKey(item, cat) : "";
 
   const thumbHtml = item.image
     ? `<div class="thumb">
@@ -140,7 +171,10 @@ function itemHtml(item, cat, inSearch) {
         <h3>${esc(name)}</h3>
         ${item.description ? `<p class="desc">${esc(tx(item.description))}</p>` : ""}
         ${item.allergens ? `<p class="allerg">${esc(tx(item.allergens))}</p>` : ""}
-        ${hasPriceValues ? `<div class="prices">${priceHtml(prices)}</div>` : ""}
+        ${hasPriceValues || key ? `<div class="ibuy">
+          ${hasPriceValues ? `<div class="prices">${priceHtml(prices)}</div>` : ""}
+          ${key ? `<div class="add-ctl${CART[key] ? " is-on" : ""}" data-key="${esc(key)}">${addCtlHtml(key)}</div>` : ""}
+        </div>` : ""}
       </div>
     </li>`;
 }
@@ -183,7 +217,7 @@ function renderCategory(cat) {
 /* "addons": { "title": …, "items": [...] } — a small tile grid that stays
    under every category (drinks, sides…), not a tab of its own */
 const addonsCat = () => DATA.addons && (DATA.addons.items || []).length
-  ? { name: DATA.addons.title, items: DATA.addons.items, variant: "addons" }
+  ? { id: "addons", name: DATA.addons.title, items: DATA.addons.items, variant: "addons" }
   : null;
 
 function renderAddons() {
@@ -241,6 +275,8 @@ function hoursHtml() {
   const isOpen = h.open < h.close
     ? now >= h.open && now < h.close
     : now >= h.open || now < h.close;
+  // leave "openText" or "closedText" out to show nothing in that state
+  if (!(isOpen ? h.openText : h.closedText)) return "";
   return `<span class="hours-pill ${isOpen ? "is-open" : "is-closed"}">
       <span class="hours-dot" aria-hidden="true"></span>${esc(tx(isOpen ? h.openText : h.closedText))}
     </span>`;
@@ -374,16 +410,240 @@ function buildSocial(social) {
 }
 
 /* Branches + social — at the bottom, above the footer */
+/* "visitLayout": "info" — one row per detail (address → maps, hours),
+   big call buttons, then the social icons under a small label */
+const clockSvg = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+  stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>`;
+const chevronSvg = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+  stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>`;
+
+function buildInfo(locations) {
+  if (!locations || !locations.length) return "";
+  const row = (icon, label, value, href) => {
+    const inner = `
+      <span class="info-ic">${icon}</span>
+      <span class="info-txt"><span class="info-label">${esc(label)}</span><span class="info-val">${esc(value)}</span></span>
+      ${href ? `<span class="info-go">${chevronSvg}</span>` : ""}`;
+    return href
+      ? `<a class="info-row" href="${esc(href)}" target="_blank" rel="noopener">${inner}</a>`
+      : `<div class="info-row">${inner}</div>`;
+  };
+  return `<h2 class="visit-title">${esc(tx(DATA.visitTitle) || ui("branches"))}</h2>` +
+    locations.map((loc) => {
+      const phones = [].concat(loc.phone || []);
+      return `<div class="info-block">
+        ${loc.address ? row(locationsSvg(), ui("address"), tx(loc.address), loc.map) : ""}
+        ${loc.hours ? row(clockSvg, ui("openHours"), tx(loc.hours)) : ""}
+        ${phones.length ? `<div class="info-calls">${phones.map((p) => `
+          <a class="info-call" href="tel:${esc(p)}">${phoneSvg()}<span>${esc(p)}</span></a>`).join("")}
+        </div>` : ""}
+      </div>`;
+    }).join("");
+}
+
 function renderVisit() {
   document.querySelectorAll(".visit").forEach((el) => el.remove());
-  const html = buildLocations(DATA.locations) + buildSocial(DATA.social);
-  if (html) $("#foot").insertAdjacentHTML("beforebegin", `<section class="visit">${html}</section>`);
+  const info = DATA.visitLayout === "info";
+  const social = buildSocial(DATA.social);
+  const html = (info ? buildInfo(DATA.locations) : buildLocations(DATA.locations)) +
+    (info && social ? `<p class="follow-label">${esc(ui("follow"))}</p>` : "") + social;
+  if (html) {
+    $("#foot").insertAdjacentHTML("beforebegin",
+      `<section class="visit${info ? " visit--info" : ""}">${html}</section>`);
+  }
 }
 
 function renderFooter() {
   const text = tx(DATA.footerText) || tx(DATA.cafeName) || "";
   $("#foot-text").textContent = text.replace("{year}", new Date().getFullYear());
   $("#foot").hidden = false;
+}
+
+/* ---------- Cart + invoice ("cart": true in menu-data.json) ---------- */
+
+let CART = {};        // item key → quantity
+let ORDER_NO = "";    // short number shown on the invoice
+const ITEMS = {};     // item key → { item, cat }
+
+/* Stable key per item: category id + its English (or only) name */
+const itemKey = (item, cat) => {
+  const n = item.name && typeof item.name === "object"
+    ? (item.name.en ?? Object.values(item.name)[0]) : item.name;
+  return `${cat.id || "menu"}|${n}`;
+};
+
+const unitPrice = (item) => {
+  const row = (item.prices || (item.price ? [{ price: item.price }] : []))
+    .find((p) => p.price && String(p.price).trim());
+  const v = row ? parseFloat(String(row.price).replace(",", ".")) : NaN;
+  return Number.isFinite(v) ? v : null;
+};
+
+/* 12.5 → "12.5 د.ل" (already HTML-escaped) */
+const money = (v) => {
+  const n = String(Math.round(v * 100) / 100);
+  const cur = CUR.symbol ? esc(tx(CUR.symbol)) : "";
+  return cur ? (CUR.after ? `${n} ${cur}` : `${cur}${n}`) : n;
+};
+
+const plusSvg = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"
+  stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>`;
+const trashSvg = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+  stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"/>
+  <path d="M8 6V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>
+  <path d="M10 11v6M14 11v6"/></svg>`;
+const minusSvg = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"
+  stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg>`;
+
+function addCtlHtml(key) {
+  const q = CART[key] || 0;
+  return q
+    ? `<button type="button" class="qty-btn" data-dec="${esc(key)}" aria-label="−">${minusSvg}</button>
+       <span class="qty">${q}</span>
+       <button type="button" class="qty-btn" data-inc="${esc(key)}" aria-label="+">${plusSvg}</button>`
+    : `<button type="button" class="add-btn" data-inc="${esc(key)}" aria-label="${esc(ui("add"))}">${plusSvg}</button>`;
+}
+
+function indexItems() {
+  [...DATA.categories, addonsCat()].filter(Boolean).forEach((cat) =>
+    (cat.items || []).forEach((item) => {
+      if (unitPrice(item) != null) ITEMS[itemKey(item, cat)] = { item, cat };
+    }));
+}
+
+function loadCart() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(`menu-cart:${ID}`) || "null");
+    if (saved && saved.items) {
+      CART = Object.fromEntries(Object.entries(saved.items).filter(([k, q]) => ITEMS[k] && q > 0));
+      ORDER_NO = Object.keys(CART).length ? String(saved.no || "") : "";
+    }
+  } catch { /* storage blocked — start empty */ }
+}
+function saveCart() {
+  try { localStorage.setItem(`menu-cart:${ID}`, JSON.stringify({ items: CART, no: ORDER_NO })); }
+  catch { /* ignore */ }
+}
+
+const cartLines = () => Object.entries(CART).map(([key, qty]) =>
+  ({ key, qty, item: ITEMS[key].item, unit: unitPrice(ITEMS[key].item) }));
+const cartTotals = () => cartLines().reduce(
+  (t, l) => ({ count: t.count + l.qty, sum: t.sum + l.qty * l.unit }), { count: 0, sum: 0 });
+
+function changeQty(key, delta) {
+  if (!ITEMS[key]) return;
+  const q = Math.max(0, (CART[key] || 0) + delta);
+  if (q) CART[key] = q; else delete CART[key];
+  if (!Object.keys(CART).length) ORDER_NO = "";
+  else if (!ORDER_NO) ORDER_NO = String(Math.floor(1000 + Math.random() * 9000));
+  saveCart();
+  document.querySelectorAll(".add-ctl").forEach((el) => {
+    if (el.dataset.key !== key) return;
+    el.innerHTML = addCtlHtml(key);
+    el.classList.toggle("is-on", !!CART[key]);
+  });
+  renderCartBar(true);
+  if (!$("#invoice").hidden) renderInvoice();
+}
+
+function renderCartBar(bump) {
+  const bar = $("#cartbar");
+  if (!bar) return;
+  const { count, sum } = cartTotals();
+  bar.hidden = !count;
+  document.body.classList.toggle("has-cart", !!count);
+  if (!count) return;
+  bar.innerHTML = `
+    <button type="button" class="cartbar-btn${bump ? " bump" : ""}" data-open-invoice>
+      <span class="cartbar-count">${count}</span>
+      <span class="cartbar-label">${esc(ui("viewInvoice"))}</span>
+      <span class="cartbar-total">${money(sum)}</span>
+    </button>`;
+}
+
+function invoiceDate() {
+  const locale = `${LANG === "ar" ? "ar-LY" : "en-GB"}-u-nu-latn`;
+  try {
+    return new Intl.DateTimeFormat(locale,
+      { dateStyle: "medium", timeStyle: "short", timeZone: DATA.timeZone || undefined }).format(new Date());
+  } catch {
+    return new Date().toLocaleString();
+  }
+}
+
+function renderInvoice() {
+  const lines = cartLines();
+  const { count, sum } = cartTotals();
+  $("#invoice .invoice-paper").innerHTML = `
+    <div class="receipt">
+      <div class="receipt-head">
+        ${DATA.logo ? `<img class="receipt-logo" src="${esc(imgSrc(DATA.logo, ID))}" alt="">` : ""}
+        <div class="receipt-name" id="invoice-title">${twoTone(tx(DATA.cafeName))}</div>
+        ${DATA.subtitle ? `<div class="receipt-sub">${esc(tx(DATA.subtitle))}</div>` : ""}
+        <div class="receipt-meta">
+          <span>${esc(ui("invoice"))}${ORDER_NO ? ` <bdi dir="ltr">#${esc(ORDER_NO)}</bdi>` : ""}</span>
+          <span>${esc(invoiceDate())}</span>
+        </div>
+      </div>
+      ${lines.length ? `
+        <table class="receipt-lines">
+          <thead><tr>
+            <th>${esc(ui("item"))}</th><th>${esc(ui("qty"))}</th><th>${esc(ui("amount"))}</th><th></th>
+          </tr></thead>
+          <tbody>${lines.map((l) => `
+            <tr>
+              <td><div class="rl-name">${esc(tx(l.item.name))}</div>
+                  <div class="rl-unit">${money(l.unit)} × ${l.qty}</div></td>
+              <td><div class="add-ctl is-on" data-key="${esc(l.key)}">${addCtlHtml(l.key)}</div></td>
+              <td class="rl-sum">${money(l.unit * l.qty)}</td>
+              <td class="rl-del"><button type="button" class="del-btn" data-remove="${esc(l.key)}"
+                aria-label="${esc(ui("remove"))} ${esc(tx(l.item.name))}">${trashSvg}</button></td>
+            </tr>`).join("")}
+          </tbody>
+        </table>
+        <div class="receipt-total"><span>${esc(ui("total"))}</span><strong>${money(sum)}</strong></div>
+        <div class="receipt-count">${esc(ui("pieces"))}: ${count}</div>`
+      : `<p class="receipt-empty">${esc(ui("empty"))}</p>`}
+    </div>`;
+}
+
+function openInvoice() {
+  renderInvoice();
+  $("#invoice").hidden = false;
+  document.body.classList.add("invoice-open");
+  $("#invoice .invoice-close").focus({ preventScroll: true });
+}
+function closeInvoice() {
+  $("#invoice").hidden = true;
+  document.body.classList.remove("invoice-open");
+}
+
+function setupCart() {
+  indexItems();
+  loadCart();
+  document.body.insertAdjacentHTML("beforeend", `
+    <div id="cartbar" class="cartbar" hidden></div>
+    <div id="invoice" class="invoice" hidden>
+      <div class="invoice-backdrop" data-close-invoice></div>
+      <div class="invoice-sheet" role="dialog" aria-modal="true" aria-labelledby="invoice-title">
+        <button type="button" class="invoice-close no-print" data-close-invoice aria-label="${esc(ui("close"))}">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+        <div class="invoice-paper"></div>
+      </div>
+    </div>`);
+  document.addEventListener("click", (e) => {
+    const t = e.target.closest("[data-inc], [data-dec], [data-remove], [data-open-invoice], [data-close-invoice]");
+    if (!t) return;
+    if (t.dataset.inc) changeQty(t.dataset.inc, +1);
+    else if (t.dataset.dec) changeQty(t.dataset.dec, -1);
+    else if (t.dataset.remove) changeQty(t.dataset.remove, -(CART[t.dataset.remove] || 0));
+    else if (t.hasAttribute("data-open-invoice")) openInvoice();
+    else if (t.hasAttribute("data-close-invoice")) closeInvoice();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !$("#invoice").hidden) closeInvoice();
+  });
 }
 
 /* ---------- Tabs, search, language ---------- */
@@ -429,6 +689,8 @@ function renderAll() {
   renderAddons();
   renderVisit();
   renderFooter();
+  renderCartBar();
+  if ($("#invoice") && !$("#invoice").hidden) renderInvoice();
   hydrateImages(document);
   select(active, false);
 }
@@ -520,6 +782,8 @@ function addStylesheet(href) {
     else renderCategory(DATA.categories[active]);
   });
   input.addEventListener("keydown", (e) => { if (e.key === "Escape") closeSearch(false); });
+
+  if (DATA.cart) setupCart();
 
   /* First paint */
   renderAll();
